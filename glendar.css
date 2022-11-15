@@ -64,9 +64,12 @@ button{
     height:42px;
     font-size: 18px;
     line-height: 42px;
+    position: relative;
+    
 }
 .weekdays{
     flex-wrap: wrap;
+    
 }
 .calendar-weekdays-today{
     background-color: #ffd32c;
@@ -79,6 +82,7 @@ button{
     outline: 1px solid #ffd32c;
     border-radius: 8px;
 }
+
 .calendar-actions{
     display: flex;
     justify-content: space-between;
@@ -91,4 +95,26 @@ button{
 .calendar-actions-right > button,.calendar-actions-left > button{
     padding:0 8px;
 }
+/* end */
+
+/* schedule */
+.schedule{
+    padding: 0 10px;
+}
+.schedule-list{
+    color:#ffd32c
+}
+.schedule-list-hasEvents::after{
+     position: absolute;
+    content: ''; 
+    top:2px;
+    right:2px;
+    width:8px;
+    height:8px;
+    border-radius: 50%;
+    background-color: rgb(99, 202, 99);
+    border:1px solid  rgb(99, 202, 99); 
+
+}
+
 /* end */

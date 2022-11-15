@@ -2,7 +2,7 @@
  * @Author: czc222 1263291450@qq.com
  * @Date: 2022-11-10 09:39:36
  * @LastEditors: czc222 1263291450@qq.com
- * @LastEditTime: 2022-11-15 10:52:03
+ * @LastEditTime: 2022-11-15 14:18:26
  * @FilePath: \GlendarDemo\glendar.js
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
  */
@@ -54,20 +54,23 @@ function getTimeList(year, month) {
   let index;
   let n = 0;
   //1号之前铺垫
+  const fragment = document.createDocumentFragment();
   if (firstWeekOfMonth == 0) {
     for (let i = 1; i < 7; i++) {
-      addBeforeMonth(firstDayOfMonth, i, allDays);
+      addBeforeMonth(firstDayOfMonth, i, fragment);
       n++;
     }
   } else {
     for (let i = 1; i < firstWeekOfMonth; i++) {
-      addBeforeMonth(firstDayOfMonth, i, allDays);
+      addBeforeMonth(firstDayOfMonth, i, fragment);
       n++;
     }
   }
 
   //月初到月末时间
   const today = new Date();
+  const schedule = JSON.parse(window.localStorage.getItem("schedule"));
+  console.log("schedule", schedule);
   for (let i = 1; i <= lastDay; i++) {
     const li = document.createElement("li");
     li.textContent = i;
@@ -79,6 +82,10 @@ function getTimeList(year, month) {
       li.classList.add("calendar-weekdays-today");
       li.textContent = "今";
     }
+    const hasEvents = `${year}-${month}-${i}`;
+    if (schedule[hasEvents]) {
+      li.classList.add("schedule-list-hasEvents");
+    }
     li.onclick = () => {
       if (index) {
         index.classList.remove("calendar-weekdays-selected");
@@ -86,11 +93,29 @@ function getTimeList(year, month) {
       li.classList.add("calendar-weekdays-selected");
       index = li;
 
+      let divs;
+      const fragment = document.createDocumentFragment();
+      if (schedule[hasEvents]) {
+        li.classList.add("schedule-list-hasEvents");
+        divs = schedule[hasEvents].map((item) => {
+          const div = document.createElement("div");
+          div.textContent = item;
+          fragment.append(div);
+          return div;
+        });
+        getEL(".schedule-list").innerHTML = "";
+        getEL(".schedule-list").append(fragment);
+      } else {
+        getEL(".schedule-list").innerHTML = `<div>无</div>`;
+      }
+
       console.log("选中的日期", new Date(year, month - 1, li.textContent));
     };
     n++;
-    allDays.append(li);
+    fragment.append(li);
   }
+
+  function onclickDay() {}
 
   //   const weekdays = getEL(".weekdays");
   //   console.log("weekdays", weekdays);
@@ -111,8 +136,9 @@ function getTimeList(year, month) {
   //方法1
 
   for (let i = 0; i < 42 - n; i++) {
-    addAfterMonth(firstDayOfMonth, i, allDays);
+    addAfterMonth(firstDayOfMonth, i, fragment);
   }
+  allDays.append(fragment);
   console.log(
     "firstDayOfMonth",
     new Date(
@@ -123,7 +149,7 @@ function getTimeList(year, month) {
   //   if (month === 2 && lastWeekOfMonth < 3 && lastWeekOfMonth !== 0) {
   //     let delta = 7 - lastWeekOfMonth;
   //     for (let i = 0; i < delta + 7; i++) {
-  //       addAfterMonth(firstDayOfMonth, i, allDays);
+  //       addAfterMonth(firstDayOfMonth, i, fragment);
   //     }
   //   } else if (
   //     lastWeekOfMonth < 3 &&
@@ -132,28 +158,28 @@ function getTimeList(year, month) {
   //   ) {
   //     let delta = 7 - lastWeekOfMonth;
   //     for (let i = 0; i < delta; i++) {
-  //       addAfterMonth(firstDayOfMonth, i, allDays);
+  //       addAfterMonth(firstDayOfMonth, i, fragment);
   //     }
   //   } else if (lastWeekOfMonth === 0 && firstWeekOfMonth !== 1) {
   //     for (let i = 0; i < 7; i++) {
-  //       addAfterMonth(firstDayOfMonth, i, allDays);
+  //       addAfterMonth(firstDayOfMonth, i, fragment);
   //     }
   //   } else {
   //     let delta = 7 - lastWeekOfMonth;
   //     for (let i = 0; i < delta + 7; i++) {
-  //       addAfterMonth(firstDayOfMonth, i, allDays);
+  //       addAfterMonth(firstDayOfMonth, i, fragment);
   //     }
   //   }
 }
-function addBeforeMonth(firstDayOfMonth, i, allDays) {
+function addBeforeMonth(firstDayOfMonth, i, fragment) {
   const li = document.createElement("li");
   li.textContent = new Date(
     firstDayOfMonth.getTime() - 24 * 60 * 60 * 1000 * i
   ).getDate();
   li.classList.add("calendar-weekdays-pre");
-  allDays.prepend(li);
+  fragment.prepend(li);
 }
-function addAfterMonth(firstDayOfMonth, i, allDays) {
+function addAfterMonth(firstDayOfMonth, i, fragment) {
   const li = document.createElement("li");
   li.textContent = new Date(
     firstDayOfMonth.getTime() +
@@ -161,7 +187,7 @@ function addAfterMonth(firstDayOfMonth, i, allDays) {
       24 * 60 * 60 * 1000 * i
   ).getDate();
   li.classList.add("calendar-weekdays-pre");
-  allDays.append(li);
+  fragment.append(li);
 }
 function getEL(Element) {
   return document.querySelector(Element);

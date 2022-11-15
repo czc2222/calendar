@@ -1,3 +1,11 @@
+<!--
+ * @Author: czc222 1263291450@qq.com
+ * @Date: 2022-11-14 09:22:04
+ * @LastEditors: czc222 1263291450@qq.com
+ * @LastEditTime: 2022-11-15 11:41:57
+ * @FilePath: \GlendarDemo\glendar.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,10 +44,21 @@
                 <button class="preMonth">上个月</button>
                 <button class="nextMonth">下个月</button>
             </div>
-
-
         </div>
+
     </div>
+    <div class="schedule">
+        <h2 class="schedule-title">我的日程</h2>
+        <div class="schedule-list"></div>
+    </div>
+    <script>
+        const schedule = {
+            '2022-11-15': ['看书', '学习'],
+            '2022-11-16': ['看电影', '睡觉'],
+            '2022-12-3': ['吃饭', '玩游戏'],
+        }
+        window.localStorage.setItem("schedule", JSON.stringify(schedule))
+    </script>
     <script src="./glendar.js"></script>
 </body>
 
