@@ -1,0 +1,94 @@
+/* css reset */
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding:0;
+    
+}
+*::before,*::after{
+    box-sizing:border-box
+
+}
+ol > li{
+    list-style: none;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: normal;
+}
+body{
+    background-color: rgb(99, 25, 235);
+    color:white;
+    font-size: 16px;
+    font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", "Wenquanyi Micro Hei", "WenQuanYi Zen Hei", "ST Heiti", SimHei, "WenQuanYi Zen Hei Sharp", sans-serif;
+}
+button{
+    font:inherit;
+}
+/* end */
+/* side-header */
+.side-header{
+    padding:4px 16px;
+}
+.side-header > h1{
+    font-size: 32px;
+}
+/* end */
+/* calendar */
+.calendar{
+    background-color: white;
+    margin:16px;
+    color:#333;
+    border-radius: 28px;
+
+}
+.calendar-top{
+    text-align: center;
+    padding:8px;
+}
+.calendar-week,.weekdays{
+   display: flex;
+   
+}
+
+.calendar-week > li{
+    width: 14.2857%;
+    text-align: center;
+    height:42px;
+    font-size: 18px;
+    line-height: 42px;
+    
+}
+.weekdays >li{
+    width: 14.2857%;
+    text-align: center;
+    height:42px;
+    font-size: 18px;
+    line-height: 42px;
+}
+.weekdays{
+    flex-wrap: wrap;
+}
+.calendar-weekdays-today{
+    background-color: #ffd32c;
+    border-radius: 8px;
+}
+.calendar-weekdays-pre{
+    color:#c1c1c1;
+}
+.calendar-weekdays-selected{
+    outline: 1px solid #ffd32c;
+    border-radius: 8px;
+}
+.calendar-actions{
+    display: flex;
+    justify-content: space-between;
+    padding:16px ;
+}
+.calendar-actions-right{
+    display: flex;
+
+}
+.calendar-actions-right > button,.calendar-actions-left > button{
+    padding:0 8px;
+}
+/* end */

@@ -1,0 +1,57 @@
+<!--
+ * @Author: czc222 1263291450@qq.com
+ * @Date: 2022-11-10 09:38:44
+ * @LastEditors: czc222 1263291450@qq.com
+ * @LastEditTime: 2022-11-14 10:59:22
+ * @FilePath: \GlendarDemo\glendar.html
+ * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .baba {
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        .erzi {
+            position: fixed;
+            top: 10rpx;
+
+            border: 1px solid red;
+        }
+    </style>
+</head>
+
+<body>
+    <del>你好</del>
+    <div>hi</div>
+    <div class="baba">
+        测试1
+        <div class="erzi">
+            儿子元素
+        </div>
+    </div>
+
+    <style></style>
+    <script>
+        const box = document.createElement('div')
+        box.textContent = 'hello world'
+        box.className = 'x'
+        document.body.append(box)
+        const style = document.createElement('style')
+        style.innerHTML = `
+        .x {border:1px solid red;height:100px;}
+        `
+        document.head.append(style)
+
+    </script>
+</body>
+
+</html>
